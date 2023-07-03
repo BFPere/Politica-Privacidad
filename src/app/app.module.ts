@@ -5,13 +5,13 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FormulariComponent } from './formulari/formulari.component';
-import { CheckformComponent } from './checkform/checkform.component';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     FormulariComponent,
-    CheckformComponent
+
   ],
   imports: [
     BrowserModule,
