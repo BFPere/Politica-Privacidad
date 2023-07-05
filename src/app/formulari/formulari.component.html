@@ -2,29 +2,89 @@
 
     <div class="container">
 
-    <form [formGroup]="formulario" (ngSubmit)="onSubmit(formulario)" novalidate>
+    <form [formGroup]="formulario" (ngSubmit)="onSubmit(formulario)">
 
         <legend>Introduzca sus datos:</legend>
 
         <br><br><label for="url" class="form-label">URL o página web:</label>
-        <input formControlName="url" class="form-control mb-2" type="url" placeholder="Ej. url.es" required> 
+        <input formControlName="url" class="form-control mb-2" type="url" placeholder="Ej. url.es"> 
         <div *ngIf="m.url.touched && m.url.invalid">
           <div *ngIf="m.url.errors?.required" class="errorform">Introduzca url o web</div>
           <div *ngIf="m.url.errors?.pattern" class="errorform">Introduzca una url o web válida</div>
         </div>
 
         <br><label for="nombreurl" class="form-label">Indique la denominación o nombre de uso corriente o más común del sitio web:</label>
-        <input formControlName="nombreurl" class="form-control mb-2" placeholder="Ej. Nombre de la web" require> 
+        <input formControlName="nombreurl" class="form-control mb-2" placeholder="Ej. Nombre de la web"> 
         <div *ngIf="m.nombreurl.touched && m.nombreurl.invalid">
           <div *ngIf="m.url.errors?.required" class="errorform">Introduzca el nombre de la web</div>
         </div>
 
         <p><br>
           <input type="radio" formControlName="persona" value="fisica">&#160;Persona física&#160;&#160;&#160;   
-          <input type="radio" formControlName="persona" value="juridica">&#160;Persona jurídica
+          <input type="radio" formControlName="persona" value="juridica">&#160;Persona jurídica (sociedad o asociación)
         </p>
         
-        <br><br><p><button class="btn btn-primary" type="submit" [disabled]="!formulario.valid">Generar política de privacidad</button></p>
+        <br><label for="responsable" class="form-label">Nombre completo del responsable del fichero de datos personales recogidos de usuarios:</label>
+        <input formControlName="responsable" class="form-control mb-2" placeholder="Ej. José García López"> 
+        <div *ngIf="m.responsable.touched && m.responsable.invalid">
+          <div *ngIf="m.responsable.errors?.required" class="errorform">Introduzca el nombre del responsable</div>
+        </div>
+
+        <br><label for="nif" class="form-label">NIF (DNI, NIE o CIF del responsable del fichero de datos personales):</label>
+        <input formControlName="nif" class="form-control mb-2" placeholder="Ej. 12345678A o A12345678"> 
+        <div *ngIf="m.nif.touched && m.nif.invalid">
+          <div *ngIf="m.nif.errors?.required" class="errorform">Introduzca el NIF</div>
+          <div *ngIf="m.nif.errors?.pattern" class="errorform">Introduzca un DNI, NIE o CIF válido</div>
+        </div>
+
+        <br><label for="direccion" class="form-label">Dirección completa del responsable del fichero de datos personales recogidos de usuarios:</label>
+        <input formControlName="direccion" class="form-control mb-2" placeholder="Ej. Calle Barcelona, 3, 08001 Barcelona"> 
+        <div *ngIf="m.direccion.touched && m.direccion.invalid">
+          <div *ngIf="m.direccion.errors?.required" class="errorform">Introduzca la dirección</div>
+        </div>
+
+        <br><label for="telefono" class="form-label">Número de teléfono del responsable del fichero de datos personales recogidos de usuarios:</label>
+        <input formControlName="telefono" class="form-control mb-2" placeholder="Ej. 931112233"> 
+        <div *ngIf="m.telefono.touched && m.telefono.invalid">
+          <div *ngIf="m.telefono.errors?.required" class="errorform">Introduzca el teléfono</div>
+          <div *ngIf="m.telefono.errors?.pattern" class="errorform">Introduzca un teléfono válido</div>
+        </div>
+
+        <br><label for="email" class="form-label">E-mail de contacto del responsable del fichero de datos personales recogidos de usuarios:</label>
+        <input formControlName="email" class="form-control mb-2" placeholder="Ej. xxxxx@yyyy.com"> 
+        <div *ngIf="m.email.touched && m.email.invalid">
+          <div *ngIf="m.email.errors?.required" class="errorform">Introduzca el e-mail</div>
+          <div *ngIf="m.email.errors?.pattern" class="errorform">Introduzca un e-mail válido</div>
+        </div>
+
+        <br><p>Los datos personales recogidos de usuarios son<br>
+          <input type="radio" formControlName="datos" value="identidad">&#160;únicamente identificativos<br>
+          <input type="radio" formControlName="datos" value="personales">&#160;incluyen datos personales sensibles
+        </p>
+
+        <br><label for="tiempo" class="form-label">¿Durante cuánto tiempo serán conservados los datos personales recogidos de usuarios (en meses o años)?:</label>
+        <input formControlName="tiempo" class="form-control mb-2" placeholder="Ej. 18 meses"> 
+        <div *ngIf="m.tiempo.touched && m.tiempo.invalid">
+          <div *ngIf="m.tiempo.errors?.required" class="errorform">Introduzca un periodo de tiempo</div>
+        </div>
+
+        <br><p>Los datos recogidos de usuarios:<br>
+          <input type="radio" formControlName="compartir" value="compartirsi">&#160;serán compartidos con otras personas o empresas (ej. Google, servicio de hosting, ...)<br>
+          <input type="radio" formControlName="compartir" value="compartirno">&#160;no serán compartidos con otras personas o empresas
+        </p>
+
+        <br><p>Nombre completo o denominación social y domicilio de la(s) persona(s) o empresa(s) con las que serán compartidos los datos personales recogidos de usuarios:<br>
+        <div class="input-group">
+          <textarea name="comentarios" rows="5" cols="180" placeholder="Ej. Google Hosting, 1600 Amphitheatre Parkway, Mountain View, California 94043, Estados Unidos."></textarea>
+        </div>
+        
+        <br><div class="form-check form-switch">
+          <input class="form-check-input" type="checkbox" name= "SSL" role="switch" id="flexSwitchCheckDefault">
+          <label class="form-check-label" for="flexSwitchCheckDefault">Marque si el sitio web dispone de un certificado SSL</label>
+        </div>
+        
+        <br><br><p><button class="btn btn-primary" type="submit">Generar política de privacidad</button></p>
+        <!-- <br><br><p><button class="btn btn-primary" type="submit" [disabled]="!formulario.valid">Generar política de privacidad</button></p> -->
         <br><br><br><br>
 
     </form>
