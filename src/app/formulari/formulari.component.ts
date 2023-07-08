@@ -15,7 +15,7 @@ export class FormulariComponent implements OnInit {
     persona: new FormControl('fisica'),
     responsable: new FormControl('', [Validators.required]), 
     nif: new FormControl('', [Validators.required, 
-      Validators.pattern('([0-9a-zA-Z])+([0-9]{7,7})+([0-9a-zA-Z])$')]),
+      Validators.pattern("^[0-9a-zA-Z][0-9]{7,7}[0-9a-zA-Z]$")]),
     direccion: new FormControl('', [Validators.required]), 
     telefono: new FormControl('', [Validators.required, 
       Validators.pattern("^[0-9]{9,9}$")]),
@@ -28,18 +28,18 @@ export class FormulariComponent implements OnInit {
     SSL: new FormControl('true'),
     })
 
-  url: string = "______________";
-  nombreurl: string = "______________";
+  url: string = "";
+  nombreurl: string = "";
   tipopersona!: string;
-  responsable: string = "_____________________________";
-  nif: string = "00000000A";
-  direccion: string = "_____________________________";
-  telefono: number = 0;
-  email: string = "_____________________________";
+  responsable: string = "";
+  nif!: string;
+  direccion: string = "";
+  telefono!: number;
+  email: string = "";
   tipodatos!: string;
-  tiempo: string = "_____________________________";
+  tiempo: string = "";
   compartirdatos!: string;
-  comentarios: string = "_____________________________";
+  comentarios: string = "";
   SSL: boolean = true;
 
   ngOnInit(): void {
