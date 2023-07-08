@@ -19,10 +19,10 @@
           <div *ngIf="m.url.errors?.required" class="errorform">Introduzca el nombre de la web</div>
         </div>
 
-        <p><br>
+        <!-- <p><br>
           <input type="radio" formControlName="persona" value="fisica">&#160;Persona física&#160;&#160;&#160;   
           <input type="radio" formControlName="persona" value="juridica">&#160;Persona jurídica (sociedad o asociación)
-        </p>
+        </p> -->
         
         <br><label for="responsable" class="form-label">Nombre completo de la persona o entidad responsable del fichero de datos personales recogidos de usuarios:</label>
         <input formControlName="responsable" class="form-control mb-2" placeholder="Ej. José García López / Nombre Empresa S.L."> 
@@ -74,16 +74,14 @@
         </p>
 
         <br><label for="comentarios" class="form-label">Nombre completo o denominación social y domicilio de la(s) persona(s) o empresa(s) con las que serán compartidos (en caso afirmativo):</label>
-        <input formControlName="comentarios" class="form-control mb-2" placeholder="Ej. Google Hosting, 1600 Amphitheatre Parkway, Mountain View, California 94043, Estados Unidos."> 
+          <input formControlName="comentarios" class="form-control mb-2" placeholder="Ej. Google Hosting, 1600 Amphitheatre Parkway, Mountain View, California 94043, Estados Unidos."> 
         
-        <br><div class="form-check form-switch">
-          <input class="form-check-input" type="checkbox" name= "SSL" role="switch" id="flexSwitchCheckDefault">
-          <label class="form-check-label" for="flexSwitchCheckDefault">Marque si el sitio web dispone de un certificado SSL</label>
-        </div>
+        <br><p>El sitio web:<br>
+          <input type="radio" formControlName="SSL" value="sslsi">&#160;Dispone de certificado SSL<br>
+          <input type="radio" formControlName="SSL" value="sslno">&#160;No dispone de certificado SSL
+        </p>
         
         <br><br><p><button class="btn btn-primary" type="submit" [disabled]="!formulario.valid">Generar política de privacidad</button></p>
-        <!-- <br><br><p><button class="btn btn-primary" type="submit" [disabled]="!formulario.valid">Generar política de privacidad</button></p> -->
-        <br><br><br><br>
 
     </form>
 </div>
@@ -110,9 +108,9 @@ El responsable del tratamiento de los datos personales recogidos en {{url}} es (
 &#160;&#160;&#160;· NIF:&#160;&#160;&#160;{{nif}}<br>
 &#160;&#160;&#160;· Dirección: &#160;&#160;&#160;{{direccion}}<br>
 &#160;&#160;&#160;· Teléfono de contacto: &#160;&#160;&#160;{{telefono}}<br>
-&#160;&#160;&#160;· Email de contacto: &#160;&#160;&#160;{{email}}
-<br><br>
-<h6>Registro de Datos de Carácter Personal</h6>
+&#160;&#160;&#160;· Email de contacto: &#160;&#160;&#160;{{email}}<br>
+<p *ngIf="SSL=='sslsi'"><br>{{nombreurl}} cuenta con el certificado de seguridad SSL.</p>
+<br><h6>Registro de Datos de Carácter Personal</h6>
 En cumplimiento de lo establecido en el RGPD y la LOPD-GDD, le informamos que los datos personales recabados por {{url}}, mediante los formularios extendidos en sus páginas quedarán incorporados y serán tratados en nuestro fichero con el fin de poder facilitar, agilizar y cumplir los compromisos establecidos entre {{url}} y el Usuario o el mantenimiento de la relación que se establezca en los formularios que éste rellene, o para atender una solicitud o consulta del mismo. Asimismo, de conformidad con lo previsto en el RGPD y la LOPD-GDD, salvo que sea de aplicación la excepción prevista en el artículo 30.5 del RGPD, se mantiene un registro de actividades de tratamiento que especifica, según sus finalidades, las actividades de tratamiento llevadas a cabo y las demás circunstancias establecidas en el RGPD.
 <br><br>
 <h6>Principios aplicables al tratamiento de los datos personales</h6>
@@ -145,7 +143,7 @@ En el momento en que se obtengan los datos personales, se informará al Usuario 
 <br><br>
 <h6>Destinatarios de los datos personales</h6>
 <p *ngIf="compartirdatos == 'compartirsi'">Los datos personales del Usuario serán compartidos con los siguientes destinatarios o categorías de destinatarios:<br>
-{{comentarios}}
+- {{comentarios}}<br>
 </p>
 En caso de que el Responsable del tratamiento tenga la intención de transferir datos personales a un tercer país u organización internacional, en el momento en que se obtengan los datos personales, se informará al Usuario acerca del tercer país u organización internacional al cual se tiene la intención de transferir los datos, así como de la existencia o ausencia de una decisión de adecuación de la Comisión.
 <br><br>
