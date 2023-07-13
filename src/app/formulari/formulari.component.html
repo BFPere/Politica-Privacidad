@@ -4,7 +4,9 @@
 
     <form [formGroup]="formulario" (ngSubmit)="onSubmit(formulario)">
 
-        <legend>Introduzca sus datos:</legend>
+      <h2>GENERADOR DE TEXTO DE POLÍTICA DE PRIVACIDAD</h2><br>
+      
+      <legend>Introduzca sus datos:</legend>
 
         <br><br><label for="url" class="form-label">URL o página web:</label>
         <input formControlName="url" class="form-control mb-2" type="url" placeholder="Ej. url.es"> 
@@ -18,11 +20,6 @@
         <div *ngIf="m.nombreurl.touched && m.nombreurl.invalid">
           <div *ngIf="m.url.errors?.required" class="errorform">Introduzca el nombre de la web</div>
         </div>
-
-        <!-- <p><br>
-          <input type="radio" formControlName="persona" value="fisica">&#160;Persona física&#160;&#160;&#160;   
-          <input type="radio" formControlName="persona" value="juridica">&#160;Persona jurídica (sociedad o asociación)
-        </p> -->
         
         <br><label for="responsable" class="form-label">Nombre completo de la persona o entidad responsable del fichero de datos personales recogidos de usuarios:</label>
         <input formControlName="responsable" class="form-control mb-2" placeholder="Ej. José García López / Nombre Empresa S.L."> 
@@ -82,13 +79,13 @@
         </p>
         
         <br><br><p><button class="btn btn-primary" type="submit" [disabled]="!formulario.valid">Generar política de privacidad</button></p>
-
+        <br><br><p><button id="copiar" (click)="copiaTexto()" class="btn btn-primary" [disabled]="!copiar">Copiar al portapapeles</button></p>
     </form>
 </div>
 </section>
 
-<section id="texto">
-<div class="container">
+<section>
+<div class="container"  id="textocompleto">
 
 <h3 class="centrado">POLÍTICA DE PRIVACIDAD DEL SITIO WEB</h3>
 <h4 class="centrado">{{url}}</h4><br><br>
@@ -186,4 +183,3 @@ Esta Política de Privacidad fue actualizada para adaptarse al Reglamento (UE) 2
 
   </div>
 </section>
- 

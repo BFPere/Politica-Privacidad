@@ -1,5 +1,6 @@
 import { Component, OnInit} from '@angular/core';
 import { FormGroup, FormControl, Validators} from '@angular/forms';
+import html2canvas  from 'html2canvas';
 
 @Component({
   selector: 'app-formulari',
@@ -25,7 +26,7 @@ export class FormulariComponent implements OnInit {
     tiempo: new FormControl('', [Validators.required]), 
     compartir: new FormControl('compartirno'),
     comentarios: new FormControl(''),
-    SSL: new FormControl('true'),
+    SSL: new FormControl('sslno'),
     })
 
   url: string = "";
@@ -40,7 +41,9 @@ export class FormulariComponent implements OnInit {
   tiempo: string = "";
   compartirdatos!: string;
   comentarios: string = "";
-  SSL: boolean = true;
+  SSL!: string;
+  textocopiado!: any;
+  copiar: boolean = false!
 
   ngOnInit(): void {
   }
@@ -59,19 +62,15 @@ export class FormulariComponent implements OnInit {
     this.compartirdatos = _datosForm.value.compartir;
     this.comentarios = _datosForm.value.comentarios;
     this.SSL = _datosForm.value.SSL;
-    console.log(this.url);
-    console.log(this.nombreurl);
-    console.log(this.tipopersona);
-    console.log(this.responsable);
-    console.log(this.nif);
-    console.log(this.direccion);
-    console.log(this.telefono);
-    console.log(this.email);
-    console.log(this.tipodatos);
-    console.log(this.tiempo);
-    console.log(this.compartirdatos);
-    console.log(this.comentarios);
-    console.log(this.SSL);
+    this.textocopiado = document.getElementById('textocompleto');
+    this.copiar = true;
+    
+  }
+
+  copiaTexto(): void {  
+      html2canvas(this.textocopiado).then(canvas => {
+      canvas.toBlob(blob => navigator.clipboard.write([new ClipboardItem({'image/png': blob!})]));
+    });
   }
 
   get m(){
